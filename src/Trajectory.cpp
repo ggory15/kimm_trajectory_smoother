@@ -1,4 +1,4 @@
-#include "kimm_trajectory/Trajectory.h"
+#include "kimm_trajectory_smoother/Trajectory.h"
 #include <limits>
 #include <iostream>
 #include <fstream>

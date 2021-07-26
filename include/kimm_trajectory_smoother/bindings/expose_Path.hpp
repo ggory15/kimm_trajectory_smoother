@@ -2,7 +2,7 @@
 #ifndef __kimm_traj_expose_Path_hpp__
 #define __kimm_traj_expose_Path_hpp__
 
-#include "kimm_trajectory/bindings/Path.hpp"
+#include "kimm_trajectory_smoother/bindings/Path.hpp"
 
 namespace kimmtraj
 {

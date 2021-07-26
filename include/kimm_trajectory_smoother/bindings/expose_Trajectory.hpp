@@ -2,7 +2,7 @@
 #ifndef __kimm_traj_expose_Trajectory_hpp__
 #define __kimm_traj_expose_Trajectory_hpp__
 
-#include "kimm_trajectory/bindings/Trajectory.hpp"
+#include "kimm_trajectory_smoother/bindings/Trajectory.hpp"
 
 namespace kimmtraj
 {

@@ -1,10 +1,10 @@
 #ifndef __kimm_traj_python_Trajectory_hpp__
 #define __kimm_traj_python_Trajectory_hpp__
 
-#include "kimm_trajectory/bindings/fwd.hpp"
+#include "kimm_trajectory_smoother/bindings/fwd.hpp"
 
-#include "kimm_trajectory/Trajectory.h"
-#include "kimm_trajectory/Path.h"
+#include "kimm_trajectory_smoother/Trajectory.h"
+#include "kimm_trajectory_smoother/Path.h"
 
 namespace kimmtraj
 {

@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>kimm_trajectory</name>
+  <name>kimm_trajectory_smoother</name>
   <version>1.0.0</version>
   <description>
     time optimized trajectory for KIMM
@@ -17,9 +17,9 @@
   <depend>eigenpy</depend>
   <depend>eigen3</depend>
 
-  <buildtool_depend>cmake</buildtool_depend>
+  <buildtool_depend>catkin</buildtool_depend>
 
   <export>
-    <build_type>cmake</build_type>
+    <build_type>catkin</build_type>
   </export>
 </package>

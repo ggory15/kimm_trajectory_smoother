@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-SET(PROJECT_NAME kimm_trajectory)
+SET(PROJECT_NAME kimm_trajectory_smoother)
 SET(PROJECT_DESCRIPTION "kimm_trajectory with time opt ")
 SET(PROJECT_URL "http://github.com/ggory15/kimm_trajectory")
 
@@ -10,15 +10,24 @@ SET(CMAKE_VERBOSE_MAKEFILE TRUE)
 SET(PROJECT_USE_CMAKE_EXPORT TRUE)
 add_compile_options(-std=c++17 -O3)
 
-INCLUDE(cmake/base.cmake)
+#INCLUDE(cmake/base.cmake)
 INCLUDE(cmake/boost.cmake)
 INCLUDE(cmake/eigen.cmake)
 INCLUDE(cmake/python.cmake)
 INCLUDE(cmake/ide.cmake)
 INCLUDE(cmake/apple.cmake)
 
-COMPUTE_PROJECT_ARGS(PROJECT_ARGS LANGUAGES CXX)
-PROJECT(${PROJECT_NAME} ${PROJECT_ARGS})
+find_package(catkin REQUIRED)
+
+catkin_package(
+ INCLUDE_DIRS include
+ LIBRARIES ${PROJECT_NAME}
+ DEPENDS system_lib
+)
+
+include_directories(
+  include
+)
 
 # --- OPTIONS ----------------------------------------
 OPTION (BUILD_PYTHON_INTERFACE "Build the python binding" ON)
@@ -42,22 +51,22 @@ IF(EIGEN_NO_AUTOMATIC_RESIZING)
   ADD_DEFINITIONS(-DEIGEN_NO_AUTOMATIC_RESIZING)
 ENDIF(EIGEN_NO_AUTOMATIC_RESIZING)
 
-ADD_PROJECT_DEPENDENCY(Eigen3 REQUIRED PKG_CONFIG_REQUIRES "eigen3 >= 3.2.0")
+find_package(Eigen3 REQUIRED PKG_CONFIG_REQUIRES "eigen3 >= 3.2.0")
 find_package(Boost REQUIRED COMPONENTS system)
 
 FINDPYTHON(3.6 REQUIRED)
 SET(PYWRAP ${PROJECT_NAME}_pywrap)
-ADD_PROJECT_DEPENDENCY(eigenpy REQUIRED)
+find_package(eigenpy REQUIRED)
 SEARCH_FOR_BOOST_PYTHON(REQUIRED)
 
 SET(${PROJECT_NAME}_MATH_HEADERS
-  include/kimm_trajectory/Path.h
-  include/kimm_trajectory/Trajectory.h
-  include/kimm_trajectory/bindings/expose_Path.hpp
-  include/kimm_trajectory/bindings/expose_Trajectory.hpp
-  include/kimm_trajectory/bindings/fwd.hpp
-  include/kimm_trajectory/bindings/Path.hpp
-  include/kimm_trajectory/bindings/Trajectory.hpp
+  include/kimm_trajectory_smoother/Path.h
+  include/kimm_trajectory_smoother/Trajectory.h
+  include/kimm_trajectory_smoother/bindings/expose_Path.hpp
+  include/kimm_trajectory_smoother/bindings/expose_Trajectory.hpp
+  include/kimm_trajectory_smoother/bindings/fwd.hpp
+  include/kimm_trajectory_smoother/bindings/Path.hpp
+  include/kimm_trajectory_smoother/bindings/Trajectory.hpp
   )
 
 SET(${PROJECT_NAME}_HEADERS
@@ -80,11 +89,9 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} SYSTEM PUBLIC ${EIGEN3_INCLUDE_DIR})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:include>)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} PUBLIC)
 
-SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION})
-INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION lib)
-
-ADD_SUBDIRECTORY(bindings)
+#SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES SOVERSION ${PROJECT_VERSION})
+#INSTALL(TARGETS ${PROJECT_NAME} EXPORT ${TARGETS_EXPORT_NAME} DESTINATION lib)
 
 
-INSTALL(FILES package.xml DESTINATION share/${PROJECT_NAME})
+#INSTALL(FILES package.xml DESTINATION share/${PROJECT_NAME})
 

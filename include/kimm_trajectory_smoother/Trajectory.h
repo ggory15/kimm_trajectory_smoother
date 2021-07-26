@@ -3,7 +3,7 @@
 #define __solver_Traj_h__
 
 #include <Eigen/Core>
-#include "kimm_trajectory/Path.h"
+#include "kimm_trajectory_smoother/Path.h"
 
 namespace kimmtraj{
 	class Trajectory

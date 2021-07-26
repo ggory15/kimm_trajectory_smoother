@@ -1,4 +1,4 @@
-#include "kimm_trajectory/Path.h"
+#include "kimm_trajectory_smoother/Path.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
